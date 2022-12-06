@@ -12,18 +12,8 @@ describe('github-oauth routes', () => {
   });
 
   it('should login and redirect users to /api/v1/github/dashboard', async () => {
-    const response = await agent
-      .get('/api/v1/github/login')
-      .redirects(1);
-
-    expect(response.body).toEqual({
-      id: expect.any(String),
-      username: 'test',
-      email: 'test@test.com',
-      avatar: expect.any(String),
-      iat: expect.any(Number),
-      exp: expect.any(Number)
-    }
-    );
-  });
+    const response = await request(app).get('/api/v1/github/login');
+    expect(res.header.location).toMatch(
+      
+    )
 });
