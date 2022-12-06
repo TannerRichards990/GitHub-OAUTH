@@ -3,7 +3,7 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 
-jest.mock('../lib/services/githubService.js');
+jest.mock('../lib/services/github');
 const agent = request.agent(app);
 
 describe('github-oauth routes', () => {
@@ -12,8 +12,9 @@ describe('github-oauth routes', () => {
   });
 
   it('should login and redirect users to /api/v1/github/dashboard', async () => {
-    const response = await request(app).get('/api/v1/github/login');
+    const res = await request(app).get('/api/v1/github/login');
     expect(res.header.location).toMatch(
-      
-    )
+      /https:\/\/github.com\/login\/oauth\/authorize\?client_id=[\w\d]+&scope=user&redirect_uri=http:\/\/localhost:7890\/api\/v1\/github\/callback/i
+    );
+  });
 });
