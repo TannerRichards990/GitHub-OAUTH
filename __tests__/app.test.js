@@ -12,10 +12,7 @@ describe('github-oauth routes', () => {
 
   it('should login and redirect users to /api/v1/github/oauth', async () => {
     const res = await request(app).get('/api/v1/github/login');
-    expect(res.header.location).toMatch(
-      /https:\/\/github.com\/login\/oauth\/authorize\?client_id=[\w\d]+&scope=user&redirect_uri=http:\/\/localhost:7890\/api\/v1\/github\/callback/i
-
-    );
+    expect(res.header.location).toMatch(/https:\/\/github.com\/login\/oauth\/authorize\?client_id=[\w\d]+&scope=user&redirect_uri=http:\/\/localhost:7890\/api\/v1\/github\/callback/i);
   });
   
   it('/api/v1/github/callback should login users and redirect to dashboard', async () => {
@@ -27,7 +24,7 @@ describe('github-oauth routes', () => {
       id: expect.any(String),
       login: 'fake_github_user',
       email: 'faker@example.com',
-      avatar: 'https://www.placecage.com/gif/200/300',
+      avatar: null,
       iat: expect.any(Number),
       exp: expect.any(Number),
     });
