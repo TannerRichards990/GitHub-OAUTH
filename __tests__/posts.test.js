@@ -12,7 +12,8 @@ describe('post routes', () => {
   });
 
   it('get allows authenticated user to see posts', async () => {
-    await agent.get('/api/v1/github/callback?code=42');
+    const restwo = await agent.get('/api/v1/github/callback?code=42');
+    expect(restwo.status).toEqual(302);
     const res = await agent.get('/api/v1/posts');
     expect(res.status).toEqual(200);
   });
