@@ -3,9 +3,9 @@
 
 DROP TABLE IF EXISTS users cascade;
 
-DROP TABLE IF EXISTS github_users;
+DROP TABLE IF EXISTS github_users cascade;
 
-DROP TABLE IF EXISTS posts;
+DROP TABLE IF EXISTS posts cascade;
 
 CREATE TABLE users (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -24,5 +24,8 @@ CREATE TABLE github_users (
 
 CREATE TABLE posts (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  post VARCHAR(255)
+  title VARCHAR,
+  content VARCHAR(255),
+  user_id BIGINT,
+  FOREIGN KEY (user_id) REFERENCES github_users(id)
 );
